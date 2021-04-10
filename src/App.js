@@ -7,14 +7,16 @@ const mapItems = (items, clickEvent) => {
   return (
     items.map((componentName, i) => {
     const componentId = getComponentId(componentName);
-    const classNames = `component component-${componentId}`
+    const classNames = `componentButton component-${componentId}`
     return (
-      <button
-        className={classNames}
-        style={{ "backgroundPosition": `${getComponentBackgroundPosition(componentId)}` }}
-        onClick={() => { clickEvent(componentName, i); }}
-        key={`componentName-${i}`}
-        />
+      <div className="component">
+        <button
+          className={classNames}
+          style={{ "backgroundPosition": `${getComponentBackgroundPosition(componentId)}` }}
+          onClick={() => { clickEvent(componentName, i); }}
+          key={`componentName-${i}`}
+          />
+      </div>
     );
   }));
 };

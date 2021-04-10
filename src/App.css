@@ -17,23 +17,20 @@
 .craftingPage {
   background-color: #151042;
   min-width: 50%;
-  display: flex;
-  align-items: center;
 }
 
 .craftingPageItems {
   display: flex;
   flex-flow: row wrap;
   align-items: center;
-  margin: auto;
+  height: 100%;
 }
 
 .craftingPageItems .component {
-  margin-left: 5%;
-  margin-right: 5%;
+  flex-basis: 21%;
 }
 
-.component {
+.componentButton {
   width: 2rem;
   height: 2rem;
   background: url(./images/ui_components.png) top left no-repeat;
