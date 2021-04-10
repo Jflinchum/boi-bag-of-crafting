@@ -46,7 +46,9 @@ class App extends Component {
             })}
           </div>
           <div id="boi-crafting-page" className="craftingPage">
-            {mapItems(this.state.bagItems, () => {})}
+            <div id="boi-crafting-page-item-list" className="craftingPageItems">
+              {mapItems(this.state.bagItems, () => {})}
+            </div>
           </div>
           <div id="boi-component-page2" className="componentPage">
             {mapItems(COMPONENTS_PAGE2, (item) => {

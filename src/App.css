@@ -16,7 +16,21 @@
 
 .craftingPage {
   background-color: #151042;
-  width: 50%;
+  min-width: 50%;
+  display: flex;
+  align-items: center;
+}
+
+.craftingPageItems {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  margin: auto;
+}
+
+.craftingPageItems .component {
+  margin-left: 5%;
+  margin-right: 5%;
 }
 
 .component {
