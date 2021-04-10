@@ -9,7 +9,7 @@
 
 .componentPage {
   background-color: #a44f09;
-  width: 75%;
+  width: 65%;
   display: flex;
   flex-flow: row wrap;
   justify-content: space-around;
@@ -17,7 +17,7 @@
 
 .craftingPage {
   background-color: #151042;
-  min-width: 25%;
+  width: 35%;
 }
 
 .craftingPageItems {
