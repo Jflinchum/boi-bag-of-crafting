@@ -38,6 +38,12 @@ class App extends Component {
     this.setState({ bagItems: currentItems });
   }
 
+  removeItemFromBag(index) {
+    const currentItems = this.state.bagItems;
+    currentItems.splice(index, 1);
+    this.setState({ bagItems: currentItems });
+  }
+
   render() {
     return (
       <div className="app">
@@ -49,7 +55,9 @@ class App extends Component {
           </div>
           <div id="boi-crafting-page" className="craftingPage">
             <div id="boi-crafting-page-item-list" className="craftingPageItems">
-              {mapItems(this.state.bagItems, () => {})}
+              {mapItems(this.state.bagItems, (itemName, index) => {
+                this.removeItemFromBag(index);
+              })}
             </div>
           </div>
           <div id="boi-component-page2" className="componentPage">
