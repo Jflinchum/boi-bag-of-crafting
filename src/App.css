@@ -1,5 +1,6 @@
 .app {
   text-align: center;
+  height: 100%;
 }
 
 .craftingContainer {
@@ -8,7 +9,7 @@
 
 .componentPage {
   background-color: #a44f09;
-  width: 25%;
+  width: 75%;
   display: flex;
   flex-flow: row wrap;
   justify-content: space-around;
@@ -16,7 +17,7 @@
 
 .craftingPage {
   background-color: #151042;
-  min-width: 50%;
+  min-width: 25%;
 }
 
 .craftingPageItems {
@@ -35,4 +36,8 @@
   height: 2rem;
   background: url(./images/ui_components.png) top left no-repeat;
   margin: 0.5rem 0.5rem;
+}
+
+.recipePage {
+  height: 100%;
 }

@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import './App.css';
-import { COMPONENTS_PAGE1, COMPONENTS_PAGE2 } from './constants';
+import { COMPONENTS_PAGE } from './constants';
 import { getComponentId, getComponentBackgroundPosition } from './util';
 
 const mapItems = (items, clickEvent) => {
@@ -48,8 +48,8 @@ class App extends Component {
     return (
       <div className="app">
         <div id="boi-crafting-ui" className="craftingContainer">
-          <div id="boi-component-page1" className="componentPage">
-            {mapItems(COMPONENTS_PAGE1, (item) => {
+          <div id="boi-component-page" className="componentPage">
+            {mapItems(COMPONENTS_PAGE, (item) => {
               this.addItemToBag(item);
             })}
           </div>
@@ -60,11 +60,8 @@ class App extends Component {
               })}
             </div>
           </div>
-          <div id="boi-component-page2" className="componentPage">
-            {mapItems(COMPONENTS_PAGE2, (item) => {
-              this.addItemToBag(item);
-            })}
-          </div>
+        </div>
+        <div id="boi-item-recipes" className="recipePage">
         </div>
       </div>
     );
