@@ -1,23 +1,29 @@
-import logo from './logo.svg';
 import './App.css';
+import { COMPONENTS_PAGE1, COMPONENTS_PAGE2 } from './constants';
+import { getComponentId, getComponentBackgroundPosition } from './util';
 
-function App() {
+const ComponentsPage = (COMPONENTS_PAGE) => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    COMPONENTS_PAGE.map((componentName) => {
+    const componentId = getComponentId(componentName);
+    const classNames = `component component-${componentId}`
+    return (<button className={classNames} style={{ "background-position": `${getComponentBackgroundPosition(componentId)}` }}/>);
+  }));
+}
+
+const App = () => {
+  return (
+    <div className="app">
+      <div id="boi-crafting-ui" className="craftingContainer">
+        <div id="boi-component-page1" className="componentPage">
+          {ComponentsPage(COMPONENTS_PAGE1)}
+        </div>
+        <div id="boi-crafting-page" className="craftingPage">
+        </div>
+        <div id="boi-component-page2" className="componentPage">
+          {ComponentsPage(COMPONENTS_PAGE2)}
+        </div>
+      </div>
     </div>
   );
 }
