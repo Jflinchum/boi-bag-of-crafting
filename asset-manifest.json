@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/boi-bag-of-crafting/static/css/main.5e11e521.chunk.css",
-    "main.js": "/boi-bag-of-crafting/static/js/main.02f9e39c.chunk.js",
-    "main.js.map": "/boi-bag-of-crafting/static/js/main.02f9e39c.chunk.js.map",
+    "main.css": "/boi-bag-of-crafting/static/css/main.1be6e8ba.chunk.css",
+    "main.js": "/boi-bag-of-crafting/static/js/main.4ea7924e.chunk.js",
+    "main.js.map": "/boi-bag-of-crafting/static/js/main.4ea7924e.chunk.js.map",
     "runtime-main.js": "/boi-bag-of-crafting/static/js/runtime-main.4ec5e5ba.js",
     "runtime-main.js.map": "/boi-bag-of-crafting/static/js/runtime-main.4ec5e5ba.js.map",
     "static/js/2.d1453d80.chunk.js": "/boi-bag-of-crafting/static/js/2.d1453d80.chunk.js",
@@ -10,13 +10,13 @@
     "static/js/3.d6de93ae.chunk.js": "/boi-bag-of-crafting/static/js/3.d6de93ae.chunk.js",
     "static/js/3.d6de93ae.chunk.js.map": "/boi-bag-of-crafting/static/js/3.d6de93ae.chunk.js.map",
     "index.html": "/boi-bag-of-crafting/index.html",
-    "static/css/main.5e11e521.chunk.css.map": "/boi-bag-of-crafting/static/css/main.5e11e521.chunk.css.map",
+    "static/css/main.1be6e8ba.chunk.css.map": "/boi-bag-of-crafting/static/css/main.1be6e8ba.chunk.css.map",
     "static/js/2.d1453d80.chunk.js.LICENSE.txt": "/boi-bag-of-crafting/static/js/2.d1453d80.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.4ec5e5ba.js",
     "static/js/2.d1453d80.chunk.js",
-    "static/css/main.5e11e521.chunk.css",
-    "static/js/main.02f9e39c.chunk.js"
+    "static/css/main.1be6e8ba.chunk.css",
+    "static/js/main.4ea7924e.chunk.js"
   ]
 }
