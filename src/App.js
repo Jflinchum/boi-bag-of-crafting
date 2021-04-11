@@ -3,7 +3,7 @@ import ReactPaginate from 'react-paginate';
 import Fuse from 'fuse.js';
 import './App.css';
 import { COMPONENTS_PAGE, RECIPE_PER_PAGE } from './constants';
-import { itemList, recipeList, itemRecipeObjects } from './itemRecipes';
+import { itemRecipeObjects } from './itemRecipes';
 import { getComponentId, getComponentBackgroundPosition } from './util';
 
 const mapItems = ({ items, clickEvent = () => {} }) => {
