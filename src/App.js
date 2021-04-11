@@ -99,9 +99,7 @@ class App extends Component {
               mapRecipes(Object.keys(recipeList).slice(this.state.currentPage * RECIPE_PER_PAGE, this.state.currentPage * RECIPE_PER_PAGE + RECIPE_PER_PAGE))
             }
             <ReactPaginate
-              previousLabel={'previous'}
-              nextLabel={'next'}
-              breakLabel={'...'}
+              pageCount={Math.floor(Object.keys(recipeList).length / RECIPE_PER_PAGE)}
               marginPagesDisplayed={2}
               pageRangeDisplayed={5}
               onPageChange={this.handlePageClick}
