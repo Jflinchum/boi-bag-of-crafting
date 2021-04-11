@@ -23,25 +23,50 @@ const mapItems = ({ items, clickEvent = () => {} }) => {
   }));
 };
 
-const mapRecipes = (recipes) => {
+const mapRecipes = (recipes, recipeIds) => {
   return (
-    recipes.map((recipeId) => {
+    recipeIds.map((recipeId) => {
       return (
         <li key={`recipe-${recipeId}`}>
           <span className="recipeLabel">{itemList[recipeId]}</span>
-          <hr/>
-          <div className="craftingPageItems">{mapItems({ items: recipeList[recipeId][0] })}</div>
-          <hr/>
-          <div className="craftingPageItems">{mapItems({ items: recipeList[recipeId][1] })}</div>
-          <hr/>
-          <div className="craftingPageItems">{mapItems({ items: recipeList[recipeId][2] })}</div>
-          <hr/>
-          <div className="craftingPageItems">{mapItems({ items: recipeList[recipeId][3] })}</div>
-          <hr/>
+          {
+            recipes[recipeId].map((recipe) => {
+              return (
+                <div>
+                  <hr/>
+                  <div className="craftingPageItems">{mapItems({ items: recipe })}</div>
+                  <hr/>
+                </div>
+              )
+            })
+          }
         </li>
       )
     })
   )
+}
+
+/**
+ * recipeList: { '1': [['RED_HEART', 'SOUL_HEART', ...], [...], [...]], '2': [...] }
+ * componentFilter: ['RED_HEART', 'SOUL_HEART', ...]
+ */
+const filterRecipeList = (recipeList, componentFilter) => {
+  let returnObject = {};
+  Object.keys(recipeList).forEach((recipeId) => {
+    const recipes = recipeList[recipeId];
+    recipes.forEach((recipe) => {
+      // If a single recipe in the recipe list has a subset of the componentFilter, add it to the return object
+      if (
+        componentFilter.every(
+          component => recipe.includes(component)
+          && componentFilter.filter(el => el === component).length
+          <= recipe.filter(el => el === component).length
+        )) {
+          returnObject[recipeId] = [...(returnObject[recipeId] || []), recipe];
+        }
+    });
+  });
+  return returnObject;
 }
 
 class App extends Component {
@@ -73,6 +98,7 @@ class App extends Component {
   }
 
   render() {
+    const filteredRecipes = filterRecipeList(recipeList, this.state.bagItems);
     return (
       <div className="app">
         <div id="boi-crafting-ui" className="craftingContainer">
@@ -96,10 +122,15 @@ class App extends Component {
         <div id="boi-item-recipe" className="recipePage">
           <div id="boi-item-recipe-list">
             {
-              mapRecipes(Object.keys(recipeList).slice(this.state.currentPage * RECIPE_PER_PAGE, this.state.currentPage * RECIPE_PER_PAGE + RECIPE_PER_PAGE))
+              mapRecipes(
+                filteredRecipes,
+                Object
+                  .keys(filteredRecipes)
+                  .slice(this.state.currentPage * RECIPE_PER_PAGE, this.state.currentPage * RECIPE_PER_PAGE + RECIPE_PER_PAGE)
+                )
             }
             <ReactPaginate
-              pageCount={Math.floor(Object.keys(recipeList).length / RECIPE_PER_PAGE)}
+              pageCount={Math.floor(Object.keys(filteredRecipes).length / RECIPE_PER_PAGE)}
               marginPagesDisplayed={2}
               pageRangeDisplayed={5}
               onPageChange={this.handlePageClick}
