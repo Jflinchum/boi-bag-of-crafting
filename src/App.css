@@ -1,6 +1,7 @@
 .app {
   text-align: center;
   height: 100%;
+  color: white;
 }
 
 button {
@@ -11,7 +12,12 @@ button {
 
 .craftingContainer {
   display: flex;
-  min-height: 6rem;
+  min-height: 12rem;
+}
+
+.craftingHeader {
+  width: 100%;
+  text-align: left;
 }
 
 .componentPage {
@@ -19,17 +25,18 @@ button {
   width: 65%;
   display: flex;
   flex-flow: row wrap;
+  padding: 1rem;
 }
 
 .craftingPage {
   background-color: #151042;
   width: 35%;
+  padding: 1rem;
 }
 
 .craftingPageItems {
   display: flex;
   flex-flow: row wrap;
-  height: 100%;
 }
 
 .craftingPageItems .component {
