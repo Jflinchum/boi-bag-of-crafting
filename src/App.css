@@ -41,6 +41,10 @@
   height: 100%;
 }
 
+.recipePage li {
+  list-style-type: none;
+}
+
 .recipeLabel {
   color: white;
 }

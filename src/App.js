@@ -4,13 +4,13 @@ import { COMPONENTS_PAGE } from './constants';
 import { itemList, recipeList } from './itemRecipes';
 import { getComponentId, getComponentBackgroundPosition } from './util';
 
-const mapItems = (items, clickEvent = () => {}) => {
+const mapItems = ({ items, clickEvent = () => {} }) => {
   return (
     items.map((componentName, i) => {
     const componentId = getComponentId(componentName);
     const classNames = `componentButton component-${componentId}`
     return (
-      <div className="component">
+      <div className="component" key={`componentName-${i}`}>
         <button
           className={classNames}
           style={{ "backgroundPosition": `${getComponentBackgroundPosition(componentId)}` }}
@@ -26,16 +26,16 @@ const mapRecipes = (recipes) => {
   return (
     Object.keys(recipes).map((recipeId) => {
       return (
-        <li key={recipeId}>
+        <li key={`recipe-${recipeId}`}>
           <span className="recipeLabel">{itemList[recipeId]}</span>
           <hr/>
-          <div className="craftingPageItems">{mapItems(recipeList[recipeId][0])}</div>
+          <div className="craftingPageItems">{mapItems({ items: recipeList[recipeId][0] })}</div>
           <hr/>
-          <div className="craftingPageItems">{mapItems(recipeList[recipeId][1])}</div>
+          <div className="craftingPageItems">{mapItems({ items: recipeList[recipeId][1] })}</div>
           <hr/>
-          <div className="craftingPageItems">{mapItems(recipeList[recipeId][2])}</div>
+          <div className="craftingPageItems">{mapItems({ items: recipeList[recipeId][2] })}</div>
           <hr/>
-          <div className="craftingPageItems">{mapItems(recipeList[recipeId][3])}</div>
+          <div className="craftingPageItems">{mapItems({ items: recipeList[recipeId][3] })}</div>
           <hr/>
         </li>
       )
@@ -67,26 +67,33 @@ class App extends Component {
   }
 
   render() {
+    window.recipes = recipeList;
     return (
       <div className="app">
         <div id="boi-crafting-ui" className="craftingContainer">
           <div id="boi-component-page" className="componentPage">
-            {mapItems(COMPONENTS_PAGE, (item) => {
+            {
+              mapItems({ items: COMPONENTS_PAGE, clickEvent: (item) => {
               this.addItemToBag(item);
-            })}
+            }})
+            }
           </div>
           <div id="boi-crafting-page" className="craftingPage">
             <div id="boi-crafting-page-item-list" className="craftingPageItems">
-              {mapItems(this.state.bagItems, (itemName, index) => {
+              {
+                mapItems({ items: this.state.bagItems, clickEvent: (itemName, index) => {
                 this.removeItemFromBag(index);
-              })}
+              }})
+              }
             </div>
           </div>
         </div>
         <div id="boi-item-recipe" className="recipePage">
           <div id="boi-item-recipe-list">
             <ul>
-              {mapRecipes(recipeList)}
+              {
+                mapRecipes(recipeList)
+              }
             </ul>
           </div>
         </div>
