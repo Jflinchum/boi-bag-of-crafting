@@ -131,6 +131,7 @@ class App extends Component {
         <div id="boi-item-recipe" className="recipePage">
           <div id="boi-item-recipe-list">
             <div className="recipeItems">
+              <h3 className="craftingHeader">Recipe results</h3>
               {
                 mapRecipes(
                   filteredRecipes,
