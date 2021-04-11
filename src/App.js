@@ -84,13 +84,13 @@ class App extends Component {
       currentItems.shift();
     }
     currentItems.push(item);
-    this.setState({ bagItems: currentItems });
+    this.setState({ bagItems: currentItems, currentPage: 0 });
   }
 
   removeItemFromBag = (index) => {
     const currentItems = this.state.bagItems;
     currentItems.splice(index, 1);
-    this.setState({ bagItems: currentItems });
+    this.setState({ bagItems: currentItems, currentPage: 0 });
   }
 
   handlePageClick = ({ selected }) => {
@@ -136,6 +136,7 @@ class App extends Component {
               onPageChange={this.handlePageClick}
               containerClassName={'pagination'}
               activeClassName={'active'}
+              forcePage={this.state.currentPage}
             />
           </div>
         </div>
