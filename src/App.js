@@ -1,6 +1,7 @@
 import { Component } from 'react';
+import ReactPaginate from 'react-paginate';
 import './App.css';
-import { COMPONENTS_PAGE } from './constants';
+import { COMPONENTS_PAGE, RECIPE_PER_PAGE } from './constants';
 import { itemList, recipeList } from './itemRecipes';
 import { getComponentId, getComponentBackgroundPosition } from './util';
 
@@ -24,7 +25,7 @@ const mapItems = ({ items, clickEvent = () => {} }) => {
 
 const mapRecipes = (recipes) => {
   return (
-    Object.keys(recipes).map((recipeId) => {
+    recipes.map((recipeId) => {
       return (
         <li key={`recipe-${recipeId}`}>
           <span className="recipeLabel">{itemList[recipeId]}</span>
@@ -47,11 +48,12 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      bagItems: []
+      bagItems: [],
+      currentPage: 0
     };
   }
 
-  addItemToBag(item) {
+  addItemToBag = (item) => {
     const currentItems = this.state.bagItems;
     if (currentItems.length >= 8) {
       currentItems.shift();
@@ -60,14 +62,17 @@ class App extends Component {
     this.setState({ bagItems: currentItems });
   }
 
-  removeItemFromBag(index) {
+  removeItemFromBag = (index) => {
     const currentItems = this.state.bagItems;
     currentItems.splice(index, 1);
     this.setState({ bagItems: currentItems });
   }
 
+  handlePageClick = ({ selected }) => {
+    this.setState({ currentPage: selected });
+  }
+
   render() {
-    window.recipes = recipeList;
     return (
       <div className="app">
         <div id="boi-crafting-ui" className="craftingContainer">
@@ -90,11 +95,19 @@ class App extends Component {
         </div>
         <div id="boi-item-recipe" className="recipePage">
           <div id="boi-item-recipe-list">
-            <ul>
-              {
-                mapRecipes(recipeList)
-              }
-            </ul>
+            {
+              mapRecipes(Object.keys(recipeList).slice(this.state.currentPage * RECIPE_PER_PAGE, this.state.currentPage * RECIPE_PER_PAGE + RECIPE_PER_PAGE))
+            }
+            <ReactPaginate
+              previousLabel={'previous'}
+              nextLabel={'next'}
+              breakLabel={'...'}
+              marginPagesDisplayed={2}
+              pageRangeDisplayed={5}
+              onPageChange={this.handlePageClick}
+              containerClassName={'pagination'}
+              activeClassName={'active'}
+            />
           </div>
         </div>
       </div>
