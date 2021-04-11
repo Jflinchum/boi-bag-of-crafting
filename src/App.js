@@ -28,7 +28,14 @@ const mapRecipes = (recipes, recipeIds) => {
     recipeIds.map((recipeId) => {
       return (
         <li className="recipe" key={`recipe-${recipeId}`}>
-          <span className="recipeLabel">{itemList[recipeId]}</span>
+          <a
+            className="recipeLabel"
+            target="_blank"
+            rel="noopener noreferrer"
+            href={`https://bindingofisaacrebirth.fandom.com/wiki/${encodeURIComponent(itemList[recipeId].replace(/ /, '_')).replace(/[!'()*]/g, escape)}`}
+          >
+              {itemList[recipeId]}
+          </a>
           <div className="recipeList">
             {
               recipes[recipeId].map((recipe) => {
