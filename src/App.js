@@ -110,7 +110,10 @@ class App extends Component {
       <div className="app">
         <div id="boi-crafting-ui" className="craftingContainer">
           <div id="boi-component-page" className="componentPage">
-            <h3 className="craftingHeader">Components</h3>
+            <div className="craftingHeader">
+              <h3>Components</h3>
+              <span className="subtext">Click on an item here to add it to the bag</span>
+            </div>
             {
               mapItems({ items: COMPONENTS_PAGE, clickEvent: (item) => {
               this.addItemToBag(item);
@@ -119,7 +122,10 @@ class App extends Component {
           </div>
           <div id="boi-crafting-page" className="craftingPage">
             <div id="boi-crafting-page-item-list" className="craftingPageItems">
-              <h3 className="craftingHeader">Bag of Crafting</h3>
+              <div className="craftingHeader">
+                <h3>Bag of Crafting</h3>
+                <span className="subtext">Click on items here to remove them from the bag</span>
+              </div>
               {
                 mapItems({ items: this.state.bagItems, clickEvent: (itemName, index) => {
                 this.removeItemFromBag(index);

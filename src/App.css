@@ -4,6 +4,14 @@
   color: white;
 }
 
+h3 {
+  margin: 0;
+}
+
+.subtext {
+  font-size: 0.8rem;
+}
+
 button {
   outline: none;
   box-shadow: none;
