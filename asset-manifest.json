@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/boi-bag-of-crafting/static/css/main.d58e2004.chunk.css",
-    "main.js": "/boi-bag-of-crafting/static/js/main.6a0fdad6.chunk.js",
-    "main.js.map": "/boi-bag-of-crafting/static/js/main.6a0fdad6.chunk.js.map",
+    "main.js": "/boi-bag-of-crafting/static/js/main.b7cd0db9.chunk.js",
+    "main.js.map": "/boi-bag-of-crafting/static/js/main.b7cd0db9.chunk.js.map",
     "runtime-main.js": "/boi-bag-of-crafting/static/js/runtime-main.4ec5e5ba.js",
     "runtime-main.js.map": "/boi-bag-of-crafting/static/js/runtime-main.4ec5e5ba.js.map",
     "static/js/2.d1453d80.chunk.js": "/boi-bag-of-crafting/static/js/2.d1453d80.chunk.js",
@@ -17,6 +17,6 @@
     "static/js/runtime-main.4ec5e5ba.js",
     "static/js/2.d1453d80.chunk.js",
     "static/css/main.d58e2004.chunk.css",
-    "static/js/main.6a0fdad6.chunk.js"
+    "static/js/main.b7cd0db9.chunk.js"
   ]
 }
