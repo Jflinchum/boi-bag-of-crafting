@@ -32,7 +32,7 @@ const mapRecipes = (recipes, recipeIds) => {
             className="recipeLabel"
             target="_blank"
             rel="noopener noreferrer"
-            href={`https://bindingofisaacrebirth.fandom.com/wiki/${encodeURIComponent(itemList[recipeId].replace(/ /, '_')).replace(/[!'()*]/g, escape)}`}
+            href={`https://bindingofisaacrebirth.fandom.com/wiki/${encodeURIComponent(itemList[recipeId].replace(/ /g, '_')).replace(/[!'()*]/g, escape)}`}
           >
               {itemList[recipeId]}
           </a>
