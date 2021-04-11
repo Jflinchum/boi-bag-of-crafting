@@ -39,7 +39,7 @@ button {
 .componentButton {
   width: 2rem;
   height: 2rem;
-  background: url(./images/ui_components.png) top left no-repeat;
+  background: url(./images/ui_components.png) top left no-repeat, grey;
   margin: 0.5rem 0.5rem;
 }
 
@@ -50,7 +50,19 @@ button {
 
 .recipePage li {
   list-style-type: none;
+}
+
+.recipeItems li {
   margin: 0 1rem;
+  outline: 0.05rem solid white;
+}
+
+.recipeItems li:nth-child(odd) {
+  background-color: #312f2f;
+}
+
+.recipeItems li:nth-child(even) {
+  background-color: #3e3d3d;
 }
 
 .recipePage button {

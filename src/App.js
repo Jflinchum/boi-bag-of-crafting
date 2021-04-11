@@ -128,14 +128,16 @@ class App extends Component {
         </div>
         <div id="boi-item-recipe" className="recipePage">
           <div id="boi-item-recipe-list">
-            {
-              mapRecipes(
-                filteredRecipes,
-                Object
-                  .keys(filteredRecipes)
-                  .slice(this.state.currentPage * RECIPE_PER_PAGE, this.state.currentPage * RECIPE_PER_PAGE + RECIPE_PER_PAGE)
-                )
-            }
+            <div className="recipeItems">
+              {
+                mapRecipes(
+                  filteredRecipes,
+                  Object
+                    .keys(filteredRecipes)
+                    .slice(this.state.currentPage * RECIPE_PER_PAGE, this.state.currentPage * RECIPE_PER_PAGE + RECIPE_PER_PAGE)
+                  )
+              }
+            </div>
             <ReactPaginate
               pageCount={Math.floor(Object.keys(filteredRecipes).length / RECIPE_PER_PAGE)}
               marginPagesDisplayed={2}
