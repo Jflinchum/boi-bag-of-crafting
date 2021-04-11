@@ -27,19 +27,19 @@ const mapRecipes = (recipes, recipeIds) => {
   return (
     recipeIds.map((recipeId) => {
       return (
-        <li key={`recipe-${recipeId}`}>
+        <li className="recipe" key={`recipe-${recipeId}`}>
           <span className="recipeLabel">{itemList[recipeId]}</span>
-          {
-            recipes[recipeId].map((recipe) => {
-              return (
-                <div>
-                  <hr/>
-                  <div className="craftingPageItems">{mapItems({ items: recipe })}</div>
-                  <hr/>
-                </div>
-              )
-            })
-          }
+          <div className="recipeList">
+            {
+              recipes[recipeId].map((recipe) => {
+                return (
+                  <div className="recipeItem craftingPageItems">
+                    {mapItems({ items: recipe })}
+                  </div>
+                )
+              })
+            }
+          </div>
         </li>
       )
     })

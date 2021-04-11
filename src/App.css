@@ -45,8 +45,26 @@
   list-style-type: none;
 }
 
+.recipe {
+  display: flex;
+}
+
 .recipeLabel {
   color: white;
+  min-width: 8rem;
+  max-width: 8rem;
+  margin: auto 0;
+}
+
+.recipeList {
+  width: 100%;
+  display: flex;
+  margin-bottom: 0.05rem;
+}
+
+.recipeItem {
+  outline: 0.05rem solid white;
+  width: 25%;
 }
 
 .pagination {
