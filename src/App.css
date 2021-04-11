@@ -80,6 +80,20 @@ button {
   background-color: #3e3d3d;
 }
 
+.recipeListHeader {
+  margin-bottom: 1rem;
+}
+
+.recipeActionContainer {
+  width: 100%;
+  display: flex;
+}
+
+.recipeActionContainer input {
+  height: 1.5rem;
+  width: 25%;
+}
+
 .recipePage button {
   border: 0.1rem solid gray;
   cursor: default;

@@ -1,8 +1,9 @@
 import { Component } from 'react';
 import ReactPaginate from 'react-paginate';
+import Fuse from 'fuse.js';
 import './App.css';
 import { COMPONENTS_PAGE, RECIPE_PER_PAGE } from './constants';
-import { itemList, recipeList } from './itemRecipes';
+import { itemList, recipeList, itemRecipeObjects } from './itemRecipes';
 import { getComponentId, getComponentBackgroundPosition } from './util';
 
 const mapItems = ({ items, clickEvent = () => {} }) => {
@@ -23,22 +24,22 @@ const mapItems = ({ items, clickEvent = () => {} }) => {
   }));
 };
 
-const mapRecipes = (recipes, recipeIds) => {
+const mapRecipes = (recipes) => {
   return (
-    recipeIds.map((recipeId) => {
+    recipes.map((recipe) => {
       return (
-        <li className="recipe" key={`recipe-${recipeId}`}>
+        <li className="recipe" key={`recipe-${recipe.id}`}>
           <a
             className="recipeLabel"
             target="_blank"
             rel="noopener noreferrer"
-            href={`https://bindingofisaacrebirth.fandom.com/wiki/${encodeURIComponent(itemList[recipeId].replace(/ /g, '_')).replace(/[!'()*]/g, escape)}`}
+            href={`https://bindingofisaacrebirth.fandom.com/wiki/${encodeURIComponent(recipe.name.replace(/ /g, '_')).replace(/[!'()*]/g, escape)}`}
           >
-              {itemList[recipeId]}
+              {recipe.name}
           </a>
           <div className="recipeList">
             {
-              recipes[recipeId].map((recipe) => {
+              recipe.recipeList.map((recipe) => {
                 return (
                   <div className="recipeItem craftingPageItems">
                     {mapItems({ items: recipe })}
@@ -54,13 +55,19 @@ const mapRecipes = (recipes, recipeIds) => {
 }
 
 /**
- * recipeList: { '1': [['RED_HEART', 'SOUL_HEART', ...], [...], [...]], '2': [...] }
+ * recipeList: { '1': { name: 'The Sad Onion', recipeList: [['RED_HEART', 'SOUL_HEART', ...], [...], [...]] }, '2': {...} }
  * componentFilter: ['RED_HEART', 'SOUL_HEART', ...]
  */
-const filterRecipeList = (recipeList, componentFilter) => {
+const filterRecipeList = (itemRecipeMapping, componentFilter, textFilter) => {
   let returnObject = {};
-  Object.keys(recipeList).forEach((recipeId) => {
-    const recipes = recipeList[recipeId];
+  const searchArray = Object.keys(itemRecipeMapping).map((recipeId) => ({ id: recipeId, name: itemRecipeMapping[recipeId].name, recipeList: itemRecipeMapping[recipeId].recipeList }));
+  let textFilteredMapping = searchArray;
+  if (textFilter) {
+    const fuse = new Fuse(searchArray, { includeScore: true, keys: ['name'] });
+    textFilteredMapping = fuse.search(textFilter).map((fuseObject) => (fuseObject.item));
+  }
+  textFilteredMapping.forEach((recipeMapping) => {
+    const recipes = recipeMapping.recipeList || [];
     recipes.forEach((recipe) => {
       // If a single recipe in the recipe list has a subset of the componentFilter, add it to the return object
       if (
@@ -69,11 +76,14 @@ const filterRecipeList = (recipeList, componentFilter) => {
           && componentFilter.filter(el => el === component).length
           <= recipe.filter(el => el === component).length
         )) {
-          returnObject[recipeId] = [...(returnObject[recipeId] || []), recipe];
+          returnObject[recipeMapping.id] = {
+            name: itemRecipeMapping[recipeMapping.id].name,
+            recipeList: [...(returnObject[recipeMapping.id] ? returnObject[recipeMapping.id].recipeList : []), recipe]
+          };
         }
     });
   });
-  return returnObject;
+  return textFilteredMapping.filter(({ id }) => returnObject[id]);
 }
 
 class App extends Component {
@@ -81,7 +91,8 @@ class App extends Component {
     super(props);
     this.state = {
       bagItems: [],
-      currentPage: 0
+      currentPage: 0,
+      search: ''
     };
   }
 
@@ -105,7 +116,7 @@ class App extends Component {
   }
 
   render() {
-    const filteredRecipes = filterRecipeList(recipeList, this.state.bagItems);
+    const filteredRecipes = filterRecipeList(itemRecipeObjects, this.state.bagItems, this.state.search);
     return (
       <div className="app">
         <div id="boi-crafting-ui" className="craftingContainer">
@@ -135,14 +146,22 @@ class App extends Component {
           </div>
         </div>
         <div id="boi-item-recipe" className="recipePage">
+          <div className="recipeListHeader">
+            <h3 className="craftingHeader">Search for Items</h3>
+            <div className="recipeActionContainer">
+              <input
+                placeholder="e.g. The Sad Onion"
+                onChange={(e) => {
+                  this.setState({ search: e.target.value });
+                }}
+                />
+            </div>
+          </div>
           <div id="boi-item-recipe-list">
             <div className="recipeItems">
-              <h3 className="craftingHeader">Recipe results</h3>
               {
                 mapRecipes(
-                  filteredRecipes,
-                  Object
-                    .keys(filteredRecipes)
+                  filteredRecipes
                     .slice(this.state.currentPage * RECIPE_PER_PAGE, this.state.currentPage * RECIPE_PER_PAGE + RECIPE_PER_PAGE)
                   )
               }
