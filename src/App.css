@@ -11,6 +11,7 @@ button {
 
 .craftingContainer {
   display: flex;
+  min-height: 6rem;
 }
 
 .componentPage {
