@@ -1,9 +1,10 @@
 import { Component } from 'react';
 import './App.css';
 import { COMPONENTS_PAGE } from './constants';
+import { itemList, recipeList } from './itemRecipes';
 import { getComponentId, getComponentBackgroundPosition } from './util';
 
-const mapItems = (items, clickEvent) => {
+const mapItems = (items, clickEvent = () => {}) => {
   return (
     items.map((componentName, i) => {
     const componentId = getComponentId(componentName);
@@ -20,6 +21,27 @@ const mapItems = (items, clickEvent) => {
     );
   }));
 };
+
+const mapRecipes = (recipes) => {
+  return (
+    Object.keys(recipes).map((recipeId) => {
+      return (
+        <li key={recipeId}>
+          <span className="recipeLabel">{itemList[recipeId]}</span>
+          <hr/>
+          <div className="craftingPageItems">{mapItems(recipeList[recipeId][0])}</div>
+          <hr/>
+          <div className="craftingPageItems">{mapItems(recipeList[recipeId][1])}</div>
+          <hr/>
+          <div className="craftingPageItems">{mapItems(recipeList[recipeId][2])}</div>
+          <hr/>
+          <div className="craftingPageItems">{mapItems(recipeList[recipeId][3])}</div>
+          <hr/>
+        </li>
+      )
+    })
+  )
+}
 
 class App extends Component {
   constructor(props) {
@@ -61,7 +83,12 @@ class App extends Component {
             </div>
           </div>
         </div>
-        <div id="boi-item-recipes" className="recipePage">
+        <div id="boi-item-recipe" className="recipePage">
+          <div id="boi-item-recipe-list">
+            <ul>
+              {mapRecipes(recipeList)}
+            </ul>
+          </div>
         </div>
       </div>
     );
